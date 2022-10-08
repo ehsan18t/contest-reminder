@@ -1,5 +1,10 @@
 package dev.pages.ahsan.creminder.cfoj;
 
+import dev.pages.ahsan.creminder.main.Config;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Objects;
 
 public class Contest {
@@ -9,7 +14,7 @@ public class Contest {
     private String phase;
     private boolean frozen;
     private long durationSeconds;
-    private long startTimeSeconds;
+    private LocalDateTime startTimeSeconds;
     private long relativeTimeSeconds;
     private String preparedBy; //can be null
     private String websiteUrl; //can be null
@@ -69,12 +74,13 @@ public class Contest {
         this.durationSeconds = durationSeconds;
     }
 
-    public long getStartTimeSeconds() {
+    public LocalDateTime getStartTimeSeconds() {
         return startTimeSeconds;
     }
 
     public void setStartTimeSeconds(long startTimeSeconds) {
-        this.startTimeSeconds = startTimeSeconds;
+        Instant ins = Instant.ofEpochSecond(startTimeSeconds);
+        this.startTimeSeconds = LocalDateTime.ofInstant(ins, ZoneId.of(Config.zoneID));
     }
 
     public long getRelativeTimeSeconds() {
