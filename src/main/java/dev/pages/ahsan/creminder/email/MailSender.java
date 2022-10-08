@@ -41,7 +41,10 @@ public class MailSender {
             m.setSubject(subject);
 
             // adding text to message
-            m.setText(message);
+//            m.setText(message);
+
+            // adding html
+            m.setText(message, "utf-8", "html");
 
             // send
             Transport.send(m);
