@@ -29,6 +29,7 @@ public class CFOJ {
                 }
             }
         } catch (Exception e) {
+            System.out.println(" - API Fetch Failed!");
             e.printStackTrace();
         }
         return list;

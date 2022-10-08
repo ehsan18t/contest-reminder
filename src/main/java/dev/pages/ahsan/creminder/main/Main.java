@@ -8,7 +8,10 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         // Arguments Check
-        if(args.length < 4) System.exit(1);
+        if(args.length < 4) {
+            System.out.println(" - ERROR: Missing Configs!");
+            System.exit(1);
+        }
 
         // load user Configs
         Config.email = args[0];
