@@ -4,7 +4,6 @@ import dev.pages.ahsan.creminder.cfoj.Contest;
 import dev.pages.ahsan.creminder.main.Config;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.Duration;
@@ -23,9 +22,9 @@ public class Composer {
     public ArrayList<Contest> filter(ArrayList<Contest> list, long seconds) {
         ArrayList<Contest> newList = new ArrayList<>();
 
-        for(Contest c: list)  {
+        for (Contest c : list) {
             Duration diff = Duration.between(LocalDateTime.now(ZoneId.of(Config.zoneID)), c.getStartTimeSeconds());
-            if(diff.toSeconds() < seconds)
+            if (diff.toSeconds() < seconds)
                 newList.add(c);
         }
         return newList;
