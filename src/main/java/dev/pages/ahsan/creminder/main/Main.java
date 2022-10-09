@@ -25,13 +25,14 @@ public class Main {
         ArrayList<Contest> contests = CFOJ.getContestList(false, String.valueOf(Phase.BEFORE));
 
         // action
-        if (Config.runType.equals("daily")) {
-            Composer comp = new Composer();
-            comp.compose(contests, Config.runType);
-            if(contests.size() != 0)
+        if(contests.size() != 0) {
+            if (Config.runType.equalsIgnoreCase("daily")) {
+                Composer comp = new Composer();
+                comp.compose(contests, Config.runType);
                 comp.notifyMe(Config.email, Config.pass, Config.to);
-            else
-                System.out.println(" - No Contests Found!");
+            }
         }
+        else
+            System.out.println(" - No Contests Found!");
     }
 }
