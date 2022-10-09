@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: "!contains(${{ github.event.issue.title }}, 'CReminder Trigger')"
+#     if: "!contains(${{ github.event.issue.title }}, 'CReminder Trigger')"
 
     steps:
     - uses: actions/checkout@v3
@@ -19,15 +19,27 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: |
+        ls
+        if [[ ${{ github.event.issue.title}} == *"CReminder Trigger"* ]]; then
+          mvn -B package --file pom.xml
+        else
+          echo "Skipping Build Jar"
+        fi
     
-    - name: Hourly Checks
-      if: "contains(${{ github.event.issue.title}}, 'HOURLY')"
-      run: script for condition 1
+#     - name: Hourly Checks
+#       if: "contains(${{ github.event.issue.title}}, 'HOURLY')"
+#       run: script for condition 1
 
     - name: Daily Checks
-      if: "contains(${{ github.event.issue.title}}, 'DAILY')"
-      run: java -jar target/creminder-1.0.jar ${{ secrets.SENDER_EMAIL }} ${{ secrets.APP_PASSWORDS }} ${{ secrets.RECEIVER_EMAIL }} ${{ secrets.ZONE_ID }} daily
+#       if: "contains(${{ github.event.issue.title}}, 'DAILY')"
+      run:  |
+        ls
+        if [[ ${{ github.event.issue.title}} == *"DAILY"* ]]; then
+          java -jar target/creminder-1.0.jar ${{ secrets.SENDER_EMAIL }} ${{ secrets.APP_PASSWORDS }} ${{ secrets.RECEIVER_EMAIL }} ${{ secrets.ZONE_ID }} daily
+        else
+          echo "Skipping Send Daily Email"
+        fi
     - name: Debug
       run: echo "${{ github.event.issue.title}}"
   
