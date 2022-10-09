@@ -3,10 +3,7 @@ name: Java CI with Maven
 on:
   issues: 
     types: [opened]
-    
-env:
-  GITHUB_TOKEN: ${{ github.token }}
-    
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,8 +12,6 @@ jobs:
     - name: Cancel if unrelated issue
       if: "!contains(${{ github.event.issue.title }}, 'CReminder Trigger')"
       uses: andymckay/cancel-action@0.2
-      with:
-          token: ${{ secrets.GITHUB_TOKEN }}
     
     - uses: actions/checkout@v3
     
