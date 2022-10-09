@@ -10,15 +10,14 @@ on:
 
 
 env:
-  SENDER_EMAIL: ${{ SENDER_EMAIL }}
-  APP_PASSWORDS: ${{ APP_PASSWORDS }}
-  RECEIVER_EMAIL: $ {{ RECEIVER_EMAIL }}
-  ZONE_ID: ${{ ZONE_ID }}
+  SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+  APP_PASSWORDS: ${{ secrets.APP_PASSWORDS }}
+  RECEIVER_EMAIL: $ {{ secrets.RECEIVER_EMAIL }}
+  ZONE_ID: ${{ secrets.ZONE_ID }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: Reminder
 
     steps:
     - uses: actions/checkout@v3
