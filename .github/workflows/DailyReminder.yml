@@ -24,4 +24,4 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Run App to Nofity
-      run: java -jar creminder-*.jar "${{ SENDER_EMAIL }} ${{ APP_PASSWORDS }} ${{ RECEIVER_EMAIL }} ${{ ZONE_ID }} daily"
+      run: java -jar creminder-1.0.jar "${{ SENDER_EMAIL }} ${{ APP_PASSWORDS }} ${{ RECEIVER_EMAIL }} ${{ ZONE_ID }} daily"
