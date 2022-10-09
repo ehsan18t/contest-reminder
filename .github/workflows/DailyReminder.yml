@@ -2,9 +2,11 @@
 name: Java CI with Maven
 
 on:
-  schedule:
-    # Everyday 5PM Asia/Dhaka Time
-    - cron: '00 11 * * *'
+  push:
+    branches: [ "main" ]
+#   schedule:
+#     # Everyday 5PM Asia/Dhaka Time
+#     - cron: '00 11 * * *'
 
 jobs:
   build:
