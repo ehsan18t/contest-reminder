@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: andymckay/cancel-action@0.2
     - name: Cancel if unrelated issue
       if: "!contains(${{ github.event.issue.title }}, 'CReminder Trigger')"
+    - uses: andymckay/cancel-action@0.2
     
     - uses: actions/checkout@v3
     - name: Set up JDK 11
