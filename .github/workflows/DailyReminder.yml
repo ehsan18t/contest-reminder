@@ -4,8 +4,8 @@ name: Java CI with Maven
 on:
   issues: 
     types: [opened]
-    cancel-in-progress: "!contains(${{ github.event.issue.title }}, 'CReminder Trigger')"
-
+    cancel-in-progress: ${{ github.event.issue.title }} != '*CReminder Trigger*'
+    
 jobs:
   build:
     runs-on: ubuntu-latest
