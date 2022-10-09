@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Contest Reminder
 
 on:
   issues: 
@@ -9,9 +9,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Cancel if unrelated issue
-      if: "!contains(${{ github.event.issue.title }}, 'CReminder Trigger')"
-      uses: andymckay/cancel-action@0.2
+    # LOL.. Normally the whole task exceute faster than cancellation.
+#     - name: Cancel if unrelated issue
+#       if: "!contains(${{ github.event.issue.title }}, 'CReminder Trigger')"
+#       uses: andymckay/cancel-action@0.2
+#       with:
+#         token: ${{ github.token }}
     
     - uses: actions/checkout@v3
     
@@ -30,9 +33,13 @@ jobs:
           echo "Skipping Build Jar"
         fi
     
-#     - name: Hourly Checks
-#       if: "contains(${{ github.event.issue.title}}, 'HOURLY')"
-#       run: script for condition 1
+    - name: Hourly Checks
+      run: |
+        if [[ "${{ github.event.issue.title }}" == *"HOURLY"* ]]; then
+          java -jar target/creminder-1.0.jar ${{ secrets.SENDER_EMAIL }} ${{ secrets.APP_PASSWORDS }} ${{ secrets.RECEIVER_EMAIL }} ${{ secrets.ZONE_ID }} hourly
+        else
+          echo "Skipping Send Hourly Email"
+        fi
 
     - name: Daily Checks
       run:  |
