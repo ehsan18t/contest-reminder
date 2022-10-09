@@ -14,6 +14,9 @@ public class Config {
     public static final String HOST = "smtp.gmail.com";
     public static final String PORT = "465";
 
+    // Mail Settings
+    public static final String emailStyles = "css/email.styles";
+
     // User Config
     public static String email; // will load from gh secret
     public static String pass; // will load from gh secret

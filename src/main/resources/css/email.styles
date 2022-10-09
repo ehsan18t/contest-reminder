@@ -1,0 +1,29 @@
+#tableStart
+"<table style=\"width: 100%; border: 1px solid black; border-collapse: collapse\">";
+
+#tableEnd
+"</table>";
+
+#thName
+"<th style=\"width: 60%; background-color: rgba(150, 212, 212, 0.4); text-align: center; vertical-align: middle; border: 1px solid black; border-collapse: collapse;\">";
+
+#thStart
+"<th style=\"width: 60%; background-color: rgba(150, 212, 212, 0.4); text-align: center; vertical-align: middle; border: 1px solid black; border-collapse: collapse;\">";
+
+#thBefore
+"<th style=\"width: 60%; background-color: rgba(150, 212, 212, 0.4); text-align: center; vertical-align: middle; border: 1px solid black; border-collapse: collapse;\">";
+
+#thEnd
+"</th>";
+
+#trStart
+"<tr style=\"border: 1px solid black; border-collapse: collapse\">";
+
+#trEnd
+"</tr>";
+
+#tdStart
+"<td style=\"text-align: center; vertical-align: middle; border: 1px solid black; border-collapse: collapse;\">";
+
+#tdEnd
+"</td>";
