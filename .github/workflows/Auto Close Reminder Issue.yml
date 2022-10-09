@@ -13,7 +13,7 @@ jobs:
           ref: ${{ github.ref }}
           check-name: 'Run tests'
           repo-token: ${{ github.token }}
-          wait-interval: 60
+          wait-interval: 20
       - if: contains(github.event.issue.title, 'CReminder Trigger') == 'true'
         name: Close Issue
         uses: peter-evans/close-issue@v2
