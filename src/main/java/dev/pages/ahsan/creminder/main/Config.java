@@ -1,11 +1,5 @@
 package dev.pages.ahsan.creminder.main;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.time.ZoneId;
-
 public class Config {
     // APIs
     public static String contestAPI = "https://codeforces.com/api/contest.list?gym=";
