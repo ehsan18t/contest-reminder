@@ -12,7 +12,7 @@ on:
 env:
   SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
   APP_PASSWORDS: ${{ secrets.APP_PASSWORDS }}
-  RECEIVER_EMAIL: $ {{ secrets.RECEIVER_EMAIL }}
+  RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
   ZONE_ID: ${{ secrets.ZONE_ID }}
 
 jobs:
@@ -30,4 +30,4 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Run App to Nofity
-      run: java -jar target/creminder-1.0.jar "$SENDER_EMAIL $APP_PASSWORDS $RECEIVER_EMAIL $ZONE_ID daily"
+      run: java -jar target/creminder-1.0.jar ${{ secrets.SENDER_EMAIL }} ${{ secrets.APP_PASSWORDS }} ${{ secrets.RECEIVER_EMAIL }} ${{ secrets.ZONE_ID }} daily
