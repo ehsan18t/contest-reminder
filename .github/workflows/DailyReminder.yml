@@ -10,8 +10,8 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    environment: Reminder
 
     steps:
     - uses: actions/checkout@v3
