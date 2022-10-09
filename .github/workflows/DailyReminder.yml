@@ -20,7 +20,6 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: |
-        ls
         if [[ ${{ github.event.issue.title}} == *"CReminder Trigger"* ]]; then
           mvn -B package --file pom.xml
         else
@@ -34,7 +33,6 @@ jobs:
     - name: Daily Checks
 #       if: "contains(${{ github.event.issue.title}}, 'DAILY')"
       run:  |
-        ls
         if [[ ${{ github.event.issue.title}} == *"DAILY"* ]]; then
           java -jar target/creminder-1.0.jar ${{ secrets.SENDER_EMAIL }} ${{ secrets.APP_PASSWORDS }} ${{ secrets.RECEIVER_EMAIL }} ${{ secrets.ZONE_ID }} daily
         else
