@@ -4,15 +4,16 @@ name: Java CI with Maven
 on:
   issues: 
     types: [opened]
+    cancel-in-progress: "!contains(${{ github.event.issue.title }}, 'CReminder Trigger')"
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Cancel if unrelated issue
-      if: "!contains(${{ github.event.issue.title }}, 'CReminder Trigger')"
-    - uses: andymckay/cancel-action@0.2
+#     - name: Cancel if unrelated issue
+#       if: "!contains(${{ github.event.issue.title }}, 'CReminder Trigger')"
+#     - uses: andymckay/cancel-action@0.2
     
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -23,7 +24,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: |
-        if [[ "${{ github.event.issue.title}}" == *"CReminder Trigger"* ]]; then
+        if [[ "${{ github.event.issue.title }}" == *"CReminder Trigger"* ]]; then
           mvn -B package --file pom.xml
         else
           echo "Skipping Build Jar"
@@ -36,11 +37,11 @@ jobs:
     - name: Daily Checks
 #       if: "contains(${{ github.event.issue.title}}, 'DAILY')"
       run:  |
-        if [[ "${{ github.event.issue.title}}" == *"DAILY"* ]]; then
+        if [[ "${{ github.event.issue.title }}" == *"DAILY"* ]]; then
           java -jar target/creminder-1.0.jar ${{ secrets.SENDER_EMAIL }} ${{ secrets.APP_PASSWORDS }} ${{ secrets.RECEIVER_EMAIL }} ${{ secrets.ZONE_ID }} daily
         else
           echo "Skipping Send Daily Email"
         fi
     - name: Debug
-      run: echo "${{ github.event.issue.title}}"
+      run: echo "${{ github.event.issue.title }}"
   
