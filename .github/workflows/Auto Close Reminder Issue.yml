@@ -19,7 +19,6 @@ jobs:
         uses: peter-evans/close-issue@v2
         with:
           token: ${{ github.token }}
-#           comment: |
-#             Reminder issue schedule created.
-#             Auto-closing this issue.
-              # Turned off comment before close to avoids unnecessary emails.
+          comment: |
+            Reminder issue schedule created.
+            Auto-closing this issue.
