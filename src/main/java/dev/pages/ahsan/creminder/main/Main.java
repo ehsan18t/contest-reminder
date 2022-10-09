@@ -28,7 +28,10 @@ public class Main {
         if (Config.runType.equals("daily")) {
             Composer comp = new Composer();
             comp.compose(contests, Config.runType);
-            comp.notifyMe(Config.email, Config.pass, Config.to);
+            if(contests.size() != 0)
+                comp.notifyMe(Config.email, Config.pass, Config.to);
+            else
+                System.out.println(" - No Contests Found!");
         }
     }
 }
