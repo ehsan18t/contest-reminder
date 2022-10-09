@@ -2,13 +2,14 @@ package dev.pages.ahsan.creminder.main;
 
 import dev.pages.ahsan.creminder.cfoj.CFOJ;
 import dev.pages.ahsan.creminder.cfoj.Contest;
+import dev.pages.ahsan.creminder.email.Composer;
 
 import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
         // Arguments Check
-        if(args.length < 4) {
+        if (args.length < 4) {
             System.out.println(" - ERROR: Missing Configs!");
             System.exit(1);
         }
@@ -24,7 +25,10 @@ public class Main {
         ArrayList<Contest> contests = CFOJ.getContestList(false, String.valueOf(Phase.BEFORE));
 
         // action
-        for (Contest c : contests)
-            System.out.println(c);
+        if (Config.runType.equals("daily")) {
+            Composer comp = new Composer();
+            comp.compose(contests, Config.runType);
+            comp.notifyMe(Config.email, Config.pass, Config.to);
+        }
     }
 }
