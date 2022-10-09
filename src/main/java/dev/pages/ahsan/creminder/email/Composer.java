@@ -50,7 +50,7 @@ public class Composer {
             msg += styles.get("trStart");
 
             // Name
-            msg += getTD(c.getName());
+            msg += getTD(makeLink(Config.oj + c.getId(), c.getName()));
 
             // Start
             msg += getTD(getDateTime(c.getStartTimeSeconds()));
@@ -71,6 +71,10 @@ public class Composer {
     ///////////////////////////////
     // Internal Private Methods //
     //////////////////////////////
+    private String makeLink(String link, String title) {
+        return "<a href=\"" + link + "\">" + title + "</a>";
+    }
+
     private String getTD(String str) {
         return styles.get("tdStart") +  str + styles.get("tdEnd");
     }

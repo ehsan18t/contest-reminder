@@ -9,6 +9,7 @@ public class Config {
 
     // APIs
     public static String contestAPI = "https://codeforces.com/api/contest.list?gym=";
+    public static String oj = "https://codeforces.com/contests/";
 
     // Mail Server Settings
     public static final String HOST = "smtp.gmail.com";
