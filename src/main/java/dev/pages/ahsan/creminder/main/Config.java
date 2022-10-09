@@ -1,6 +1,12 @@
 package dev.pages.ahsan.creminder.main;
 
 public class Config {
+    // App Settings
+    // 2 Hour 5 Minutes
+    // This config will select contest that are going to start within this time
+    // for hourly reminder
+    public static long filterDuration = 7500;
+
     // APIs
     public static String contestAPI = "https://codeforces.com/api/contest.list?gym=";
 

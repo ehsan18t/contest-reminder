@@ -20,6 +20,17 @@ public class Composer {
     private String subject;
     private HashMap<String, String> styles;
 
+    public ArrayList<Contest> filter(ArrayList<Contest> list, long seconds) {
+        ArrayList<Contest> newList = new ArrayList<>();
+
+        for(Contest c: list)  {
+            Duration diff = Duration.between(LocalDateTime.now(ZoneId.of(Config.zoneID)), c.getStartTimeSeconds());
+            if(diff.toSeconds() < seconds)
+                newList.add(c);
+        }
+        return newList;
+    }
+
     public void compose(ArrayList<Contest> list, String runType) {
         loadStyle();
         switch (runType) {
@@ -27,7 +38,7 @@ public class Composer {
                 subject = "Upcoming Contests";
                 break;
             case "hourly":
-                subject = "";
+                subject = "Constests Starting Within 2 Hour";
                 break;
         }
 
