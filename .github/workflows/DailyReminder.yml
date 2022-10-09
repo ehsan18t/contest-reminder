@@ -12,12 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Probably Works Now 
     - name: Cancel if unrelated issue
       if: "!contains(${{ github.event.issue.title }}, 'CReminder Trigger')"
       uses: andymckay/cancel-action@0.2
       with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
     
     - uses: actions/checkout@v3
     
