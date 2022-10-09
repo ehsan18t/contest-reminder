@@ -28,5 +28,6 @@ jobs:
     - name: Daily Checks
       if: "contains(${{ github.event.issue.title}}, 'DAILY')"
       run: java -jar target/creminder-1.0.jar ${{ secrets.SENDER_EMAIL }} ${{ secrets.APP_PASSWORDS }} ${{ secrets.RECEIVER_EMAIL }} ${{ secrets.ZONE_ID }} daily
-
+    - name: Debug
+      run: echo "${{ github.event.issue.title}}"
   
