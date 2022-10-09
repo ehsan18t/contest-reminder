@@ -4,7 +4,10 @@ name: Java CI with Maven
 on:
   issues: 
     types: [opened]
-    cancel-in-progress: ${{ github.event.issue.title != '*CReminder Trigger*' }}
+
+    concurrency:
+      group: ${{ github.event.issue.title }}
+      cancel-in-progress: ${{ github.event.issue.title != '*CReminder Trigger*' }}
     
 jobs:
   build:
