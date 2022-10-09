@@ -50,19 +50,13 @@ public class Composer {
             msg += styles.get("trStart");
 
             // Name
-            msg += styles.get("tdStart");
-            msg += c.getName();
-            msg += styles.get("tdEnd");
+            msg += getTD(c.getName());
 
             // Start
-            msg += styles.get("tdStart");
-            msg += getDateTime(c.getStartTimeSeconds());
-            msg += styles.get("tdEnd");
+            msg += getTD(getDateTime(c.getStartTimeSeconds()));
 
             // Before
-            msg += styles.get("tdStart");
-            msg += beforeLeft(c.getStartTimeSeconds()) + " left";
-            msg += styles.get("tdEnd");
+            msg += getTD(beforeLeft(c.getStartTimeSeconds()) + " left");
 
             msg += styles.get("trEnd");
         }
@@ -77,6 +71,10 @@ public class Composer {
     ///////////////////////////////
     // Internal Private Methods //
     //////////////////////////////
+    private String getTD(String str) {
+        return styles.get("tdStart") +  str + styles.get("tdEnd");
+    }
+
     private void loadStyle() {
         styles = new HashMap<>();
         try {
@@ -104,15 +102,11 @@ public class Composer {
         String date = "";
         Duration diff = Duration.between(LocalDateTime.now(ZoneId.of(Config.zoneID)), localDateTime);
 
-        if (diff.toDays() != 0) {
+        if (diff.toDays() != 0)
             date += diff.toDays() + "d ";
+        if (diff.toHours() != 0)
             date += (diff.toHours() % 24) + "h ";
-            date += (diff.toMinutes() % 60) + "m ";
-        } else if (diff.toHours() != 0) {
-            date += (diff.toHours() % 24) + "h ";
-            date += (diff.toMinutes() % 60) + "m ";
-        } else
-            date += (diff.toMinutes() % 60) + "m ";
+        date += (diff.toMinutes() % 60) + "m";
 
         return date;
     }
