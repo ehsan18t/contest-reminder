@@ -7,13 +7,13 @@ jobs:
   titleContainsCheck:
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for 60s to triger the other action
-        uses: lewagon/wait-on-check-action@v1.0.0
-        with:
-          ref: ${{ github.ref }}
-          check-name: 'Run tests'
-          repo-token: ${{ github.token }}
-          wait-interval: 20
+#       - name: Wait for 60s to triger the other action
+#         uses: lewagon/wait-on-check-action@v1.0.0
+#         with:
+#           ref: ${{ github.ref }}
+#           check-name: 'Run tests'
+#           repo-token: ${{ github.token }}
+#           wait-interval: 20
       - if: contains(github.event.issue.title, 'CReminder Trigger') == 'true'
         name: Close Issue
         uses: peter-evans/close-issue@v2
