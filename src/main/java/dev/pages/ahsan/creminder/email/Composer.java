@@ -50,7 +50,7 @@ public class Composer {
             msg += styles.get("trStart");
 
             // Name
-            msg += getTD(makeLink(Config.oj + c.getId(), c.getName()));
+            msg += getTD(makeLink(c));
 
             // Start
             msg += getTD(getDateTime(c.getStartTimeSeconds()));
@@ -71,8 +71,11 @@ public class Composer {
     ///////////////////////////////
     // Internal Private Methods //
     //////////////////////////////
-    private String makeLink(String link, String title) {
-        return "<a href=\"" + link + "\">" + title + "</a>";
+    private String makeLink(Contest c) {
+        return "<a style=\'text-decoration: none;\' href=\"" + Config.oj + "contests/" + c.getId() + "\" target=\"_blank\">" + c.getName() + "</a>"
+                + (c.getRelativeTimeSeconds() > -259200 ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"" + Config.oj + "contestRegistration/" + c.getId() + "\" target=\"_blank\""
+                + " style=\"background-color: #f44336; color: white; padding: 3px; text-align: center;"
+                +" text-decoration: none; display: inline-block;\"> Register </a>" : "");
     }
 
     private String getTD(String str) {
