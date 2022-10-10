@@ -107,8 +107,7 @@ public class Composer {
     }
 
     private String getDateTime(LocalDateTime ldt) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy (E), hh:mm a");
-        return ldt.format(dateTimeFormatter);
+        return ldt.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")) + "<br>" + ldt.format(DateTimeFormatter.ofPattern("E, hh:mm a"));
     }
 
     private String beforeLeft(LocalDateTime localDateTime) {
