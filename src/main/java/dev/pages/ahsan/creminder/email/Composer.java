@@ -30,7 +30,7 @@ public class Composer {
     }
 
     public void compose(ArrayList<Contest> list, String runType) {
-        subject = LocalDateTime.now().format(DateTimeFormatter.ofPattern("[MMM/dd/yyyy] "));
+        subject = "(" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMM/dd/yyyy")) + ") ";
         loadStyle();
         switch (runType) {
             case "daily":
