@@ -13,7 +13,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-@SuppressWarnings("ALL")
 public class Composer {
     private String msg;
     private String subject;
@@ -37,7 +36,7 @@ public class Composer {
                 subject = "Upcoming Contests";
                 break;
             case "hourly":
-                subject = "Constests Starting Within 2 Hour";
+                subject = "Contests Starting Within 2 Hour";
                 break;
         }
 
@@ -47,17 +46,22 @@ public class Composer {
         for (int i = list.size() - 1; i > -1; i--) {
             Contest c = list.get(i);
 
+            //noinspection StringConcatenationInLoop
             msg += styles.get("trStart");
 
             // Name
+            //noinspection StringConcatenationInLoop
             msg += getTD(makeLink(c));
 
             // Start
+            //noinspection StringConcatenationInLoop
             msg += getTD(getDateTime(c.getStartTimeSeconds()));
 
             // Before
+            //noinspection StringConcatenationInLoop
             msg += getTD(beforeLeft(c.getStartTimeSeconds()) + " left");
 
+            //noinspection StringConcatenationInLoop
             msg += styles.get("trEnd");
         }
         msg += styles.get("tableEnd");
@@ -72,20 +76,21 @@ public class Composer {
     // Internal Private Methods //
     //////////////////////////////
     private String makeLink(Contest c) {
-        return "<a style=\'text-decoration: none;\' href=\"" + Config.oj + "contests/" + c.getId() + "\" target=\"_blank\">" + c.getName() + "</a>"
+        return "<a style='text-decoration: none;' href=\"" + Config.oj + "contests/" + c.getId() + "\" target=\"_blank\">" + c.getName() + "</a>"
                 + (c.getRelativeTimeSeconds() > -259200 ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"" + Config.oj + "contestRegistration/" + c.getId() + "\" target=\"_blank\""
                 + " style=\"background-color: #f44336; color: white; padding: 3px; text-align: center;"
-                +" text-decoration: none; display: inline-block;\"> Register </a>" : "");
+                + " text-decoration: none; display: inline-block;\"> Register </a>" : "");
     }
 
     private String getTD(String str) {
-        return styles.get("tdStart") +  str + styles.get("tdEnd");
+        return styles.get("tdStart") + str + styles.get("tdEnd");
     }
 
     private void loadStyle() {
         styles = new HashMap<>();
         try {
             InputStream is = getClass().getClassLoader().getResourceAsStream(Config.emailStyles);
+            assert is != null;
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String line;
             while ((line = br.readLine()) != null) {
