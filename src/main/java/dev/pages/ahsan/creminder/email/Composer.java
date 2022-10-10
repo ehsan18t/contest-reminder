@@ -30,13 +30,14 @@ public class Composer {
     }
 
     public void compose(ArrayList<Contest> list, String runType) {
+        subject = LocalDateTime.now().format(DateTimeFormatter.ofPattern("[MMM/dd/yyyy] "));
         loadStyle();
         switch (runType) {
             case "daily":
-                subject = "Upcoming Contests";
+                subject += "Upcoming Contests";
                 break;
             case "hourly":
-                subject = "Contests Starting Within 2 Hour";
+                subject += "Contests Starting Within 2 Hour";
                 break;
         }
 
