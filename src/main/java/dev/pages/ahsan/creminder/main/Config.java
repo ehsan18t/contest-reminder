@@ -6,6 +6,7 @@ public class Config {
     // This config will select contest that are going to start within this time
     // for hourly reminder
     public static long filterDuration = 7500;
+    public static String senderAlias = "Contest Reminder";
 
     // APIs
     public static String contestAPI = "https://codeforces.com/api/contest.list?gym=";

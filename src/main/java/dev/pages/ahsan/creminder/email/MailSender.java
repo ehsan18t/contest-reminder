@@ -32,7 +32,7 @@ public class MailSender {
         MimeMessage m = new MimeMessage(session);
         try {
             // from email
-            m.setFrom(email);
+            m.setFrom(Config.senderAlias + " <" + email + ">");
 
             // adding recipient to message
             m.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
