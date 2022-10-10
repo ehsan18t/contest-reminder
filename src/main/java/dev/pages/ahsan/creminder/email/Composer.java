@@ -2,6 +2,7 @@ package dev.pages.ahsan.creminder.email;
 
 import dev.pages.ahsan.creminder.cfoj.Contest;
 import dev.pages.ahsan.creminder.main.Config;
+import dev.pages.ahsan.creminder.utils.Utils;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -9,12 +10,16 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Composer {
     private String msg;
     private String subject;
     private HashMap<String, String> styles;
+    private HashMap<String, String> encodings;
 
+    // curr = LocalDateTime.now()
+    // take contest within (curr - seconds) to curr
     public ArrayList<Contest> filter(ArrayList<Contest> list, long seconds) {
         ArrayList<Contest> newList = new ArrayList<>();
 
@@ -52,8 +57,12 @@ public class Composer {
             msg += getTD(makeLink(c));
 
             // Start
-            //noinspection StringConcatenationInLoop
-            msg += getTD(getDateTime(c.getStartTimeSeconds()));
+            if (runType.equalsIgnoreCase("daily"))
+                //noinspection StringConcatenationInLoop
+                msg += getTD(getDateTime(c));  // add google calender link
+            else
+                //noinspection StringConcatenationInLoop
+                msg += getTD(getDateTime(c.getStartTimeSeconds()));
 
             // Before
             //noinspection StringConcatenationInLoop
@@ -74,10 +83,10 @@ public class Composer {
     // Internal Private Methods //
     //////////////////////////////
     private String makeLink(Contest c) {
-        return styles.get("a").replace("LINKHERE", Config.oj + "contests/" + c.getId()) + c.getName() + styles.get("_a")
+        return styles.get("a").replace("LINK-HERE", Config.oj + "contests/" + c.getId()) + c.getName() + styles.get("_a")
                 + (c.getRelativeTimeSeconds() > -259200 ? styles.get("5space")
-                + styles.get("aBtn").replace("LINKHERE", Config.oj + "contestRegistration/" + c.getId())
-                +"Register" + styles.get("_a") : "");
+                + styles.get("aBtn").replace("LINK-HERE", Config.oj + "contestRegistration/" + c.getId())
+                + "Register" + styles.get("_a") : "");
     }
 
     private String getTD(String str) {
@@ -90,6 +99,49 @@ public class Composer {
 
     private String getDateTime(LocalDateTime ldt) {
         return ldt.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")) + "<br>" + ldt.format(DateTimeFormatter.ofPattern("E, hh:mm a"));
+    }
+
+    private String getDateTime(Contest c) {
+        String str = getDateTime(c.getStartTimeSeconds());
+        String googleCalLink = genGCalLink(c);
+        return styles.get("a").replace("LINK-HERE", googleCalLink) + str + styles.get("_a");
+    }
+
+    private String getDateTime(LocalDateTime ldt, long duration) {
+        String date = "";
+        date += ldt.format(DateTimeFormatter.ofPattern("yyyyMMdd")) + "T" + ldt.format(DateTimeFormatter.ofPattern("HHmmss"));
+        LocalDateTime end = ldt.plusSeconds(duration);
+        date += "/" + end.format(DateTimeFormatter.ofPattern("yyyyMMdd")) + "T" + end.format(DateTimeFormatter.ofPattern("HHmmss"));
+        return date;
+    }
+
+    private String genGCalLink(Contest c) {
+        loadEncodings();
+        String base = "https://calendar.google.com/calendar/r/eventedit?";
+        base += "text=" + encode(c.getName());
+        base += "&details=" + encode(c.getName() + " " + Config.oj + "contests/" + c.getId());
+        base += "&location=" + encode("Home");
+        base += "&dates=" + encode(getDateTime(c.getStartTimeSeconds(), c.getDurationSeconds()));
+        base += "&ctz=" + encode(Config.zoneID);
+        return base;
+    }
+
+    private String encode(String str) {
+        String encoded = "";
+        for (int i = 0; i < str.length(); i++) {
+            String c = str.substring(i, i + 1);
+            String ec = encodings.get(c);
+            //noinspection StringConcatenationInLoop
+            encoded += Objects.requireNonNullElse(ec, c);
+        }
+        return encoded;
+    }
+
+    private void loadEncodings() {
+        encodings = Utils.readHashMapFromFile(Config.urlEncodings, "#");
+        // manually adding space into map because most editor will
+        // remove whitespace from url-encoding.txt file automatically.
+        encodings.put(" ", "%20");
     }
 
     private String beforeLeft(LocalDateTime localDateTime) {

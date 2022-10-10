@@ -18,6 +18,7 @@ public class Config {
 
     // Mail Settings
     public static final String emailStyles = "css/email.styles";
+    public static final String urlEncodings = "url-encodings.txt";
 
     // User Config
     public static String email; // will load from gh secret
