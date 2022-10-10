@@ -82,9 +82,10 @@ public class Composer {
     ///////////////////////////////
     // Internal Private Methods //
     //////////////////////////////
+    // 172800 = 2 days
     private String makeLink(Contest c) {
         return styles.get("a").replace("LINK-HERE", Config.oj + "contests/" + c.getId()) + c.getName() + styles.get("_a")
-                + (c.getRelativeTimeSeconds() > -259200 ? styles.get("5space")
+                + (c.getRelativeTimeSeconds() > -172800 ? styles.get("5space")
                 + styles.get("aBtn").replace("LINK-HERE", Config.oj + "contestRegistration/" + c.getId())
                 + "Register" + styles.get("_a") : "");
     }
