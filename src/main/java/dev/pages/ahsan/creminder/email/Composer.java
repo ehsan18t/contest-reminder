@@ -42,13 +42,13 @@ public class Composer {
         }
 
         msg = "";
-        msg += styles.get("tableStart");
+        msg += styles.get("table");
         msg += styles.get("tableHead");
         for (int i = list.size() - 1; i > -1; i--) {
             Contest c = list.get(i);
 
             //noinspection StringConcatenationInLoop
-            msg += styles.get("trStart");
+            msg += styles.get("tr");
 
             // Name
             //noinspection StringConcatenationInLoop
@@ -63,9 +63,9 @@ public class Composer {
             msg += getTD(beforeLeft(c.getStartTimeSeconds()) + " left");
 
             //noinspection StringConcatenationInLoop
-            msg += styles.get("trEnd");
+            msg += styles.get("_tr");
         }
-        msg += styles.get("tableEnd");
+        msg += styles.get("_table");
     }
 
     public void notifyMe(String email, String pass, String to) {
@@ -84,7 +84,7 @@ public class Composer {
     }
 
     private String getTD(String str) {
-        return styles.get("tdStart") + str + styles.get("tdEnd");
+        return styles.get("td") + str + styles.get("_td");
     }
 
     private void loadStyle() {
