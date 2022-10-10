@@ -3,9 +3,6 @@ package dev.pages.ahsan.creminder.email;
 import dev.pages.ahsan.creminder.cfoj.Contest;
 import dev.pages.ahsan.creminder.main.Config;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -88,22 +85,7 @@ public class Composer {
     }
 
     private void loadStyle() {
-        styles = new HashMap<>();
-        try {
-            InputStream is = getClass().getClassLoader().getResourceAsStream(Config.emailStyles);
-            assert is != null;
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.startsWith("#")) {
-                    String value = br.readLine();
-                    styles.put(line.replace("#", ""), value);
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(" - Exception in loading styles!");
-            e.printStackTrace();
-        }
+        styles = Utils.readHashMapFromFile(Config.emailStyles, "#");
     }
 
     private String getDateTime(LocalDateTime ldt) {
