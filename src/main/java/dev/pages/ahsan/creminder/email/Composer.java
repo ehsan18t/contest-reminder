@@ -121,7 +121,6 @@ public class Composer {
         String base = "https://calendar.google.com/calendar/r/eventedit?";
         base += "text=" + encode(c.getName());
         base += "&details=" + encode(c.getName() + " " + Config.oj + "contests/" + c.getId());
-        base += "&location=" + encode("Home");
         base += "&dates=" + encode(getDateTime(c.getStartTimeSeconds(), c.getDurationSeconds()));
         base += "&ctz=" + encode(Config.zoneID);
         return base;
