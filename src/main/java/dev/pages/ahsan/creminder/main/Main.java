@@ -27,17 +27,14 @@ public class Main {
         // action
         if (contests.size() != 0) {
             Composer comp = new Composer();
-            if (Config.runType.equalsIgnoreCase("daily")) {
+            if (Config.runType.equalsIgnoreCase("hourly"))
+                contests = comp.filter(contests, Config.filterDuration);
+
+            if (contests.size() > 0) {
                 comp.compose(contests, Config.runType);
                 comp.notifyMe(Config.email, Config.pass, Config.to);
-            } else if (Config.runType.equalsIgnoreCase("hourly")) {
-                contests = comp.filter(contests, Config.filterDuration);
-                if (contests.size() > 0) {
-                    comp.compose(contests, Config.runType);
-                    comp.notifyMe(Config.email, Config.pass, Config.to);
-                } else
-                    System.out.println(" - No Contests Found Within 2 Hour!");
-            }
+            } else
+                System.out.println(" - No Contests Found Within 2 Hour!");
         } else
             System.out.println(" - No Contests Found!");
     }
