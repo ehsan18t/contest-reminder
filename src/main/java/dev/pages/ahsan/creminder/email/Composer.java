@@ -24,8 +24,9 @@ public class Composer {
         ArrayList<Contest> newList = new ArrayList<>();
 
         for (Contest c : list) {
-            Duration diff = Duration.between(LocalDateTime.now(ZoneId.of(Config.zoneID)), c.getStartTimeSeconds());
-            if (diff.toSeconds() < seconds)
+            // Either starting within 2 hour
+            // or, started not more than 5 minutes
+            if ((-1L) * c.getRelativeTimeSeconds() < seconds || c.getRelativeTimeSeconds() < 300)
                 newList.add(c);
         }
         return newList;
