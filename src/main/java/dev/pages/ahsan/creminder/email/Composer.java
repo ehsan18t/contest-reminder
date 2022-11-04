@@ -25,8 +25,8 @@ public class Composer {
 
         for (Contest c : list) {
             // Either starting within 2 hour
-            // or, started not more than 5 minutes
-            if ((-1L) * c.getRelativeTimeSeconds() < seconds || c.getRelativeTimeSeconds() < 300)
+            // or, started not more than 5 minutes (This condition will automatically be fulfilled [check: CFOJ.java])
+            if ((-1L) * c.getRelativeTimeSeconds() < seconds)
                 newList.add(c);
         }
         return newList;
