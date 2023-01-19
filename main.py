@@ -1,13 +1,18 @@
-from scraper.CodeChef import CodeChef
-from scraper.CodeForces import CodeForces
+import sys
+from config import Config
+from config import init
+
+
+# for debug
+def writeToHtml(text):
+    f = open('index.html', 'w')
+    f.write(text)
+    f.close()
+
+
+def main():
+    init.init(sys.argv)
+
 
 if __name__ == '__main__':
-    # CodeForces Example
-    cf = CodeForces()
-    cf.init()
-    for ll in cf.getContests():
-        print(ll)
-    # CodeChef Example
-    cc = CodeChef()
-    for c in cc.fetch()['future_contests']:
-        print(c['contest_name'])
+    main()

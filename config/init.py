@@ -1,4 +1,23 @@
-import Config
+from config import Config
+from scraper.AtCoder import AtCoder
+from scraper.CodeChef import CodeChef
+from scraper.CodeForces import CodeForces
+
+
+def loadOJ():
+    Config.oj = {
+        'cf': CodeForces(),
+        'cc': CodeChef(),
+        'ac': AtCoder(),
+    }
+
+
+def initArgs(argv):
+    Config.senderEmail = argv[1]
+    Config.senderPassword = argv[2]
+    Config.receiverEmail = argv[3]
+    Config.userOJ = argv[4].strip().split(',')
+    Config.zoneID = argv[5]
 
 
 def loadStyles():
@@ -9,5 +28,7 @@ def loadStyles():
     f.close()
 
 
-def init():
+def init(argv):
     loadStyles()
+    loadOJ()
+    initArgs(argv)
