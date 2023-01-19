@@ -5,15 +5,16 @@ from pytz import timezone
 from config import Config
 
 
-def parseDateTime(dt, dtzone, fmt):
-    tz1 = timezone(dtzone)
-    tz2 = timezone(Config.zoneID)
+def parseDateTime(dt: str, dtzone: str, fmt: str) -> datetime.datetime:
+    tz1 = timezone(dtzone)  # Contest Zone
+    tz2 = timezone(Config.zoneID)  # Local Zone
 
-    new_dt = datetime.datetime.strptime(dt, fmt)
-    new_dt = tz1.localize(new_dt)
-
+    # parsing datetime
+    dt = datetime.datetime.strptime(dt, fmt)
+    # converting to UTC
+    dt = tz1.localize(dt)
     # Convert zone
-    return new_dt.astimezone(tz2)
+    return dt.astimezone(tz2)
 
 
 class MainScraper:
