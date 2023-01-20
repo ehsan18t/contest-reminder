@@ -8,6 +8,10 @@ class CodeForces(MainScraper):
     def __init__(self):
         super().__init__(self.url)
 
+    def compose(self):
+        contests = self.getContests()
+        return contests
+
     def getContests(self):
         self.init()
         contests = []

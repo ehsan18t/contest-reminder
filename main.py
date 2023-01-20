@@ -1,5 +1,5 @@
 import sys
-from config import Config
+
 from config import init
 
 
