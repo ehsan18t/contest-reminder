@@ -4,7 +4,7 @@ from config import init
 
 
 # for debug
-def writeToHtml(text):
+def write_to_html(text):
     f = open('index.html', 'w')
     f.write(text)
     f.close()

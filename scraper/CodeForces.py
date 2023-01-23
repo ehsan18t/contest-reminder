@@ -1,4 +1,4 @@
-from scraper.MainScraper import MainScraper, parseDateTime
+from scraper.MainScraper import MainScraper, parse_date_time
 
 
 class CodeForces(MainScraper):
@@ -9,10 +9,10 @@ class CodeForces(MainScraper):
         super().__init__(self.url)
 
     def compose(self):
-        contests = self.getContests()
+        contests = self.get_contests()
         return contests
 
-    def getContests(self):
+    def get_contests(self):
         self.init()
         contests = []
         table = self.soup.find('table')
@@ -24,7 +24,7 @@ class CodeForces(MainScraper):
             row.pop(1)  # Excluding Writers Name
             for td in row:
                 contest.append(td.get_text().strip())
-            contest[1] = parseDateTime(contest[1], self.ojZone, '%b/%d/%Y %H:%M')
+            contest[1] = parse_date_time(contest[1], self.ojZone, '%b/%d/%Y %H:%M')
             contest[1] = contest[1].strftime('%Y-%m-%d %H:%M')
             contests.append(contest)
 

@@ -4,7 +4,7 @@ from scraper.CodeChef import CodeChef
 from scraper.CodeForces import CodeForces
 
 
-def loadOJ():
+def load_oj():
     Config.oj = {
         'cf': CodeForces(),
         'cc': CodeChef(),
@@ -12,7 +12,7 @@ def loadOJ():
     }
 
 
-def initArgs(argv):
+def init_args(argv):
     Config.senderEmail = argv[1]
     Config.senderPassword = argv[2]
     Config.receiverEmail = argv[3]
@@ -20,7 +20,7 @@ def initArgs(argv):
     Config.zoneID = argv[5]
 
 
-def loadStyles():
+def load_styles():
     f = open(Config.style_path)
     for line in f.readlines():
         parts = line.split('@@')
@@ -29,6 +29,6 @@ def loadStyles():
 
 
 def init(argv):
-    loadStyles()
-    loadOJ()
-    initArgs(argv)
+    load_styles()
+    load_oj()
+    init_args(argv)

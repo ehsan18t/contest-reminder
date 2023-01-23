@@ -7,7 +7,7 @@ class AtCoder(MainScraper):
     def __init__(self):
         super().__init__(self.url)
 
-    def getContests(self):
+    def get_contests(self):
         contests = []
         table = self.soup.findAll('table')[2]
         rows = table.find('tbody').findAll('tr')

@@ -7,7 +7,7 @@ from pytz import timezone
 from config import Config
 
 
-def parseDateTime(dt: str, dtzone: str, fmt: str) -> datetime.datetime:
+def parse_date_time(dt: str, dtzone: str, fmt: str) -> datetime.datetime:
     tz1 = timezone(dtzone)  # Contest Zone
     tz2 = timezone(Config.zoneID)  # Local Zone
 
@@ -26,7 +26,7 @@ class MainScraper:
         self.url = url
 
     def init(self):
-        self.soup = self.getSoup()
+        self.soup = self.get_soup()
 
-    def getSoup(self):
+    def get_soup(self):
         return BeautifulSoup(requests.get(self.url).content, 'lxml')

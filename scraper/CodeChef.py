@@ -7,8 +7,8 @@ class CodeChef(MainAPIParser):
     def __init__(self):
         super().__init__(self.url)
 
-    def getUpcoming(self):
+    def get_upcoming(self):
         return self.fetch()['future_contests']
 
-    def getOngoing(self):
+    def get_ongoing(self):
         return self.fetch()['present_contests']
